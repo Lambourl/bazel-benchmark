@@ -1,0 +1,8 @@
+module(
+    name = "re_benchmark",
+    version = "0.0.1",
+)
+
+# Keep the external dependency surface minimal so the benchmark measures
+# compile distribution, not dependency fetching.
+bazel_dep(name = "rules_cc", version = "0.2.17")

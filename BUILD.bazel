@@ -1,0 +1,6 @@
+# Root package. Build everything with:
+#   bazel build //...
+# The benchmark target of interest is //app:main which links the full
+# generated TU library (//generated:re_benchmark_lib).
+
+package(default_visibility = ["//visibility:public"])

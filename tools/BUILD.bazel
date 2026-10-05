@@ -1,0 +1,5 @@
+package(default_visibility = ["//visibility:public"])
+
+# The generator is a dependency-free Python script; run it directly:
+#   python3 tools/generate_tus.py --count 20000 --depth 22 --stamp default
+exports_files(["generate_tus.py"])

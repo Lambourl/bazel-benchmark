@@ -1,0 +1,7 @@
+#include "bench/fib.hpp"
+
+// RE Benchmark TU 16359 of 20000 (depth=28, stamp="default")
+namespace bench_tu_16359 {
+constexpr unsigned long long result = ::bench::slow_fib<28, 16359>();
+unsigned long long sink() { return result; }
+}  // namespace bench_tu_16359

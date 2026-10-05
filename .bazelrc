@@ -1,0 +1,35 @@
+# ============================================================================
+# Benchmark build configuration
+# ============================================================================
+common --enable_bzlmod
+
+# Keep the C++ toolchain hermetic-ish and consistent across workers.
+build --cxxopt=-std=c++17
+build --host_cxxopt=-std=c++17
+
+# Verbose failures help when a generated TU misbehaves.
+build --verbose_failures
+
+# ----------------------------------------------------------------------------
+# Local parallelism. For a single big machine, override on the CLI:
+#   bazel build //... --jobs=512
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Remote / distributed execution profile (10k-core clusters).
+# Fill in your endpoint + credentials, then build with: --config=remote
+#
+#   bazel build //... --config=remote --jobs=10000
+# ----------------------------------------------------------------------------
+build:remote --remote_executor=grpcs://YOUR_RBE_ENDPOINT
+build:remote --remote_cache=grpcs://YOUR_RBE_ENDPOINT
+build:remote --jobs=1000
+build:remote --remote_timeout=3600
+# EngFlow / mTLS clusters typically need client certs:
+# build:remote --tls_client_certificate=/path/to/engflow.crt
+# build:remote --tls_client_key=/path/to/engflow.key
+# build:remote --remote_instance_name=default
+
+# Cache-only profile (remote cache, local execution):
+build:cache --remote_cache=grpcs://YOUR_RBE_ENDPOINT
+build:cache --remote_timeout=3600
